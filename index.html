@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+   <head>
+      <title>Latin grammar</title>
+      <meta charset="utf-8">
+      <meta name = "viewport" content = "width = device-width, initial-scale = 1.0">
+
+      <!-- Bootstrap -->
+      <link href = "bootstrap/css/bootstrap.min.css" rel = "stylesheet">
+
+   </head>
+
+   <body>
+     <div class="container">
+       <div class="row justify-content-around">
+         <h1 class="col-sm-12 text-center">Learning latin</h1>
+       </div>
+       <div class="row">
+        <div class="col-md-4">
+          <div class="row">
+            <p class="text-center h4 button">Left</p>
+          </div>
+          <div class="row mt-3">
+            <button id="show-nouns">Show nouns</button>
+          </div>
+          <div class="row mt-3">
+            <button id="random-noun">Random noun</button>
+          </div>
+          <div class="row mt-3">
+            <button id="clear">Clear</button>
+          </div>
+        </div>
+        <div class="col-sm-8">
+          <p class="text-center h4 button">Placeholder</p>
+          <div class="col-sm-12" id="placeholder">
+            <!-- intentionally left blank -->
+          </div>
+          <form hidden id="noun-form" class="col-sm-12" action="JavaScript:checkAnswer()">
+            <div class="form-group">Declension:
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="declension" id="noun-declension-first" value="first" required>
+                <label class="form-check-label" for="first-declension">I</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="declension" id="noun-declension-second" value="second">
+                <label class="form-check-label" for="second-declension">II</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="declension" id="noun-declension-third-consonant" value="thirdConsonant">
+                <label class="form-check-label" for="third-declension-consonant">III con</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="declension" id="noun-declension-third-vowel" value="thirdVowel">
+                <label class="form-check-label" for="third-declension-vowel">III vow</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="declension" id="noun-declension-third-mixed" value="thirdMixed">
+                <label class="form-check-label" for="third-declension-mixed">III mixed</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="declension" id="noun-declension-fourth" value="fourth">
+                <label class="form-check-label" for="fourth-declension">IV</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="declension" id="noun-declension-fith" value="fith">
+                <label class="form-check-label" for="fith-declension">V</label>
+              </div>
+            </div>
+            <div class="form-group">Genre:
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="genre" id="noun-genre-masculinum" value="masculinum" required>
+                <label class="form-check-label" for="genre">m</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="genre" id="noun-genre-femininum" value="femininum">
+                <label class="form-check-label" for="genre">f</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="genre" id="noun-genre-neutrum" value="neutrum">
+                <label class="form-check-label" for="genre">n</label>
+              </div>
+            </div>
+            <div class="form-group">Number:
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="number" id="noun-number-singularis" value="singularis" required>
+                <label class="form-check-label" for="number">sing</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="number" id="noun-number-pluralis" value="pluralis">
+                <label class="form-check-label" for="number">pl</label>
+              </div>
+            </div>
+            <div class="form-group">Case:
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="case" id="noun-case-nominativus" value="nominativus" required>
+                <label class="form-check-label" for="case">nom</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="case" id="noun-case-genetivus" value="genetivus">
+                <label class="form-check-label" for="case">gen</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="case" id="noun-case-dativus" value="dativus">
+                <label class="form-check-label" for="case">dat</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="case" id="noun-case-accusativus" value="accusativus">
+                <label class="form-check-label" for="case">acc</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="case" id="noun-case-ablativus" value="ablativus">
+                <label class="form-check-label" for="case">abl</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="case" id="noun-case-vocativus" value="vocativus">
+                <label class="form-check-label" for="case">voc</label>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Feedback</button>
+          </form>
+        </div>
+      </div>
+     </div>
+
+      <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+      <script src="https://code.jquery.com/jquery.js"></script>
+
+      <!-- Include all compiled plugins (below), or include individual files as needed -->
+      <script src="bootstrap/js/bootstrap.min.js"></script>
+
+      <script type="module" src="script.js"></script>
+
+   </body>
+</html>
