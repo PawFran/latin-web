@@ -74,7 +74,7 @@ const firstDeclension = {
 };
 
 const secondDeclension = {
-  masculinum1: {
+  masculinum: {
     singularis: {
       nominativus: "servus",
       genetivus: "servi",
@@ -92,7 +92,7 @@ const secondDeclension = {
       vocativus: "servi"
     }
   },
-  masculinum2: {
+  /*masculinum2: {
     singularis: {
       nominativus: "puer",
       genetivus: "pueri",
@@ -109,7 +109,7 @@ const secondDeclension = {
       ablativus: "pueris",
       vocativus: "pueri"
     }
-  },
+  },*/
   neutrum: {
     singularis: {
       nominativus: "oppidum",
