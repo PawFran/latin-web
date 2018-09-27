@@ -350,8 +350,104 @@ const firstConjugation = {
   }
 };
 
+const secondConjugation = {
+  indicativus: {
+    praesens: {
+      activus: {
+        singularis: {
+          first: "moneo",
+          second: "mones",
+          third: "monet"
+        },
+        pluralis: {
+          first: "monemus",
+          second: "monetis",
+          third: "monent"
+        }
+      }
+    }
+  },
+  imperativus: {
+    praesens: {
+      activus: {
+        singularis: {
+          second: "mone"
+        },
+        pluralis: {
+          second: "monete"
+        }
+      }
+    }
+  }
+};
+
+const thirdConjugation = {
+  indicativus: {
+    praesens: {
+      activus: {
+        singularis: {
+          first: "lego",
+          second: "legis",
+          third: "legit"
+        },
+        pluralis: {
+          first: "legimus",
+          second: "legitis",
+          third: "legunt"
+        }
+      }
+    }
+  },
+  imperativus: {
+    praesens: {
+      activus: {
+        singularis: {
+          second: "lege"
+        },
+        pluralis: {
+          second: "legite"
+        }
+      }
+    }
+  }
+};
+
+const fourthConjugation = {
+  indicativus: {
+    praesens: {
+      activus: {
+        singularis: {
+          first: "audio",
+          second: "audis",
+          third: "audit"
+        },
+        pluralis: {
+          first: "audimus",
+          second: "auditis",
+          third: "audiunt"
+        }
+      }
+    }
+  },
+  imperativus: {
+    praesens: {
+      activus: {
+        singularis: {
+          second: "audi"
+        },
+        pluralis: {
+          second: "audite"
+        }
+      }
+    }
+  }
+};
+
 const conjugationTree = {
-  first: firstConjugation
+  first: firstConjugation,
+  second: secondConjugation,
+  third: thirdConjugation,
+  fourth: fourthConjugation
 }
 
 const randomKey = function (obj) {
@@ -395,16 +491,17 @@ document.getElementById('noun-form').onsubmit = function(e) {
   const number = formData.get("number");
   const grammaticalCase = formData.get("case");
 
-  console.log("declension: " + declension);
-  console.log("gender: " + gender);
-  console.log("number: " + number);
-  console.log("case: " + grammaticalCase);
+  // console.log("declension: " + declension);
+  // console.log("gender: " + gender);
+  // console.log("number: " + number);
+  // console.log("case: " + grammaticalCase);
 
   const feedback = isCorrectNoun(declension, gender, number, grammaticalCase);
   if (feedback) {
     console.log("correct");
   } else {
-    console.log("incorrect. given answer: declension " + declension + " gender " + gender + " number " + number + " case " + grammaticalCase);
+    console.log("incorrect. given answer: declension " + declension + " gender " + gender + " number " + number 
+      + " case " + grammaticalCase);
     console.log("correct answer would be: declension " + currentWord.declension + " gender " + 
       currentWord.gender + " number " + currentWord.number + " case " + currentWord.grammaticalCase);
   }
@@ -421,12 +518,12 @@ document.getElementById('verb-form').onsubmit = function(e) {
   const number = formData.get("number");
   const person = formData.get("person");
 
-  console.log("conjugation: " + conjugation);
-  console.log("mood: " + mood);
-  console.log("tense: " + tense);
-  console.log("voice: " + voice);
-  console.log("number: " + number);
-  console.log("person: " + person);
+  // console.log("conjugation: " + conjugation);
+  // console.log("mood: " + mood);
+  // console.log("tense: " + tense);
+  // console.log("voice: " + voice);
+  // console.log("number: " + number);
+  // console.log("person: " + person);
 
   const feedback = isCorrectVerb(conjugation, mood, tense, voice, number, person);
   if (feedback) {
