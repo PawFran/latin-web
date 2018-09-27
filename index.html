@@ -28,6 +28,9 @@
             <button id="random-noun">Random noun</button>
           </div>
           <div class="row mt-3">
+            <button id="random-verb">Random verb</button>
+          </div>
+          <div class="row mt-3">
             <button id="clear">Clear</button>
           </div>
         </div>
@@ -36,85 +39,85 @@
           <div class="col-sm-12" id="placeholder">
             <!-- intentionally left blank -->
           </div>
-          <form hidden id="noun-form" class="col-sm-12" action="JavaScript:checkAnswer()">
+          <form hidden id="noun-form" class="col-sm-12" action="/">
             <div class="form-group">Declension:
               <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" name="declension" id="noun-declension-first" value="first" required>
-                <label class="form-check-label" for="first-declension">I</label>
+                <label class="form-check-label" for="noun-declension-first">I</label>
               </div>
               <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" name="declension" id="noun-declension-second" value="second">
-                <label class="form-check-label" for="second-declension">II</label>
+                <label class="form-check-label" for="noun-declension-second">II</label>
               </div>
               <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" name="declension" id="noun-declension-third-consonant" value="thirdConsonant">
-                <label class="form-check-label" for="third-declension-consonant">III con</label>
+                <label class="form-check-label" for="noun-declension-third-consonant">III con</label>
               </div>
               <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" name="declension" id="noun-declension-third-vowel" value="thirdVowel">
-                <label class="form-check-label" for="third-declension-vowel">III vow</label>
+                <label class="form-check-label" for="noun-declension-third-vowel">III vow</label>
               </div>
               <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" name="declension" id="noun-declension-third-mixed" value="thirdMixed">
-                <label class="form-check-label" for="third-declension-mixed">III mixed</label>
+                <label class="form-check-label" for="noun-declension-third-mixed">III mixed</label>
               </div>
               <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" name="declension" id="noun-declension-fourth" value="fourth">
-                <label class="form-check-label" for="fourth-declension">IV</label>
+                <label class="form-check-label" for="noun-declension-fourth">IV</label>
               </div>
               <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" name="declension" id="noun-declension-fith" value="fith">
-                <label class="form-check-label" for="fith-declension">V</label>
+                <label class="form-check-label" for="noun-declension-fith">V</label>
               </div>
             </div>
             <div class="form-group">Genre:
               <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" name="genre" id="noun-genre-masculinum" value="masculinum" required>
-                <label class="form-check-label" for="genre">m</label>
+                <label class="form-check-label" for="noun-genre-masculinum">m</label>
               </div>
               <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" name="genre" id="noun-genre-femininum" value="femininum">
-                <label class="form-check-label" for="genre">f</label>
+                <label class="form-check-label" for="noun-genre-femininum">f</label>
               </div>
               <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" name="genre" id="noun-genre-neutrum" value="neutrum">
-                <label class="form-check-label" for="genre">n</label>
+                <label class="form-check-label" for="noun-genre-neutrum">n</label>
               </div>
             </div>
             <div class="form-group">Number:
               <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" name="number" id="noun-number-singularis" value="singularis" required>
-                <label class="form-check-label" for="number">sing</label>
+                <label class="form-check-label" for="noun-number-singularis">sing</label>
               </div>
               <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" name="number" id="noun-number-pluralis" value="pluralis">
-                <label class="form-check-label" for="number">pl</label>
+                <label class="form-check-label" for="noun-number-pluralis">pl</label>
               </div>
             </div>
             <div class="form-group">Case:
               <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" name="case" id="noun-case-nominativus" value="nominativus" required>
-                <label class="form-check-label" for="case">nom</label>
+                <label class="form-check-label" for="noun-case-nominativus">nom</label>
               </div>
               <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" name="case" id="noun-case-genetivus" value="genetivus">
-                <label class="form-check-label" for="case">gen</label>
+                <label class="form-check-label" for="noun-case-genetivus">gen</label>
               </div>
               <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" name="case" id="noun-case-dativus" value="dativus">
-                <label class="form-check-label" for="case">dat</label>
+                <label class="form-check-label" for="noun-case-dativus">dat</label>
               </div>
               <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" name="case" id="noun-case-accusativus" value="accusativus">
-                <label class="form-check-label" for="case">acc</label>
+                <label class="form-check-label" for="noun-case-accusativus">acc</label>
               </div>
               <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" name="case" id="noun-case-ablativus" value="ablativus">
-                <label class="form-check-label" for="case">abl</label>
+                <label class="form-check-label" for="noun-case-ablativus">abl</label>
               </div>
               <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" name="case" id="noun-case-vocativus" value="vocativus">
-                <label class="form-check-label" for="case">voc</label>
+                <label class="form-check-label" for="noun-case-vocativus">voc</label>
               </div>
             </div>
             <button type="submit" class="btn btn-primary">Feedback</button>
