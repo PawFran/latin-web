@@ -290,13 +290,13 @@ const fithDeclension = {
 };
 
 const declensionTree = {
-  first: firstDeclension,
-  second: secondDeclension,
-  thirdConsonant: thirdDeclensionConsonantVariant,
-  thirdVowel: thirdDeclensionVowelVariant,
-  thirdMixed: thirdDeclensionMixedVariant,
+  // first: firstDeclension,
+  // second: secondDeclension,
+  // thirdConsonant: thirdDeclensionConsonantVariant,
+  // thirdVowel: thirdDeclensionVowelVariant,
+  thirdMixed: thirdDeclensionMixedVariant/*,
   fourth: fourthDeclension,
-  fith: fithDeclension
+  fith: fithDeclension*/
 };
 
 const randomKey = function (obj) {
@@ -330,10 +330,10 @@ document.getElementById('noun-form').onsubmit = function(e) {
   const number = formData.get("number");
   const grammaticalCase = formData.get("case");
 
-  /*console.log("declension: " + declension);
+  console.log("declension: " + declension);
   console.log("genre: " + genre);
   console.log("number: " + number);
-  console.log("case: " + grammaticalCase);*/
+  console.log("case: " + grammaticalCase);
 
   const feedback = isCorrect(declension, genre, number, grammaticalCase);
   if (feedback) {
@@ -347,5 +347,7 @@ document.getElementById('noun-form').onsubmit = function(e) {
 
 // *** FEEDBACK ***
 function isCorrect(declension, genre, number, grammaticalCase) {
-  return declensionTree[declension][genre][number][grammaticalCase] === currentWord.word
+  // some declensions doesn't have every genres. warning: possible to lose sight of some errors here
+  return declensionTree[declension][genre] !== undefined 
+    && declensionTree[declension][genre][number][grammaticalCase] === currentWord.word
 }
