@@ -450,10 +450,15 @@ const conjugationTree = {
   fourth: fourthConjugation
 }
 
-const randomKey = function (obj) {
-    const keys = Object.keys(obj)
+function randomKey(obj) {
+    const keys = Object.keys(obj);
     return keys[ keys.length * Math.random() << 0 ];
 };
+
+function randomKeyWithFilter(obj, allowableValues) {
+  const keys = Object.keys(obj).filter(value => -1 !== allowableValues.indexOf(value));
+  return keys[ keys.length * Math.random() << 0 ];
+}
 
 function randomNounWithDescription() {
   const res = {};
@@ -481,7 +486,72 @@ function randomVerbWithDescription() {
   return res;
 }
 
-// *** FORM ***
+function randomVerbAdvanced(conjugationsIncluded, moodsIncluded, tensesIncluded, voicesIncluded, numbersIncluded, personsIncluded) {
+  currentWord = randomVerbWithDescriptionAdvanced(conjugationsIncluded, moodsIncluded, tensesIncluded, voicesIncluded, numbersIncluded, personsIncluded);
+
+  const placeholder = document.getElementById("placeholder");
+  placeholder.innerHTML = "Word: " + currentWord.word;
+
+  document.getElementById("verb-form").hidden = false;
+  document.getElementById("noun-form").hidden = true;
+};
+
+function randomVerbWithDescriptionAdvanced(conjugationsIncluded, moodsIncluded, tensesIncluded, voicesIncluded, numbersIncluded, personsIncluded) {
+  const res = {};
+  
+  res.conjugation = randomKeyWithFilter(conjugationTree, conjugationsIncluded);
+  res.mood = randomKeyWithFilter(conjugationTree[res.conjugation], moodsIncluded);
+  res.tense = randomKeyWithFilter(conjugationTree[res.conjugation][res.mood], tensesIncluded);
+  res.voice = randomKeyWithFilter(conjugationTree[res.conjugation][res.mood][res.tense], voicesIncluded);
+  res.number = randomKeyWithFilter(conjugationTree[res.conjugation][res.mood][res.tense][res.voice], numbersIncluded);
+  res.person = randomKeyWithFilter(conjugationTree[res.conjugation][res.mood][res.tense][res.voice][res.number], personsIncluded);
+  res.word = conjugationTree[res.conjugation][res.mood][res.tense][res.voice][res.number][res.person];
+
+  return res;
+}
+
+// *** GENERATIVE FORMS ***
+document.getElementById('random-verb-form').onsubmit = function(e) {
+  e.preventDefault();
+  const formData = new FormData(e.target);
+
+  const firstConjugation = formData.get("first-conjugation");
+  const secondConjugation = formData.get("second-conjugation");
+  const thirdConjugation = formData.get("third-conjugation");
+  const fourthConjugation = formData.get("fourth-conjugation");
+
+  const indicativeMood = formData.get("mood-indicative");
+  const imperativeMood = formData.get("mood-imperative"); 
+
+  const presentTense = formData.get("tense-present"); 
+
+  const activeVoice = formData.get("voice-active"); 
+
+  const numberSingularis = formData.get("number-singularis");
+  const numberPluralis = formData.get("number-pluralis");
+
+  const firstPerson = formData.get("person-first");
+  const secondPerson = formData.get("person-second");
+  const thirdPerson = formData.get("person-third");
+
+  const conjugationsIncluded = [firstConjugation, secondConjugation, thirdConjugation, fourthConjugation].filter(n => n);
+  const moodsIncluded = [indicativeMood, imperativeMood].filter(n => n);
+  const tensesIncluded = [presentTense].filter(n => n);
+  const voicesIncluded = [activeVoice].filter(n => n);
+  const numbersIncluded = [numberSingularis, numberPluralis].filter(n => n);
+  const personsIncluded  = [firstPerson, secondPerson, thirdPerson].filter(n => n);
+
+  // console.log("conjugations included: " + conjugationsIncluded);
+  // console.log("moods included: " + moodsIncluded);
+  // console.log("tenses included: " + tensesIncluded);
+  // console.log("voices included: " + voicesIncluded);
+  // console.log("numbers included: " + numbersIncluded);
+  // console.log("persons included: " + personsIncluded);
+
+  randomVerbAdvanced(conjugationsIncluded, moodsIncluded, tensesIncluded, voicesIncluded, numbersIncluded, personsIncluded);
+};
+
+// *** GUESSING FORMS ***
 document.getElementById('noun-form').onsubmit = function(e) {
   e.preventDefault();
   const formData = new FormData(e.target);
