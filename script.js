@@ -324,54 +324,78 @@ const firstConjugation = {
     praesens: {
       activus: {
         singularis: {
-          first: "laboro",
-          second: "laboras",
-          third: "laborat"
+          first: "laudo",
+          second: "laudas",
+          third: "laudat"
         },
         pluralis: {
-          first: "laboramus",
-          second: "laboratis",
-          third: "laborant"
+          first: "laudamus",
+          second: "laudatis",
+          third: "laudant"
         }
       },
       passivus: {
         singularis: {
-          first: "laboro",
-          second: "laboras",
-          third: "laborat"
+          first: "laudor",
+          second: "laudaris",
+          third: "laudatur"
         },
         pluralis: {
-          first: "laboramus",
-          second: "laboratis",
-          third: "laborant"
+          first: "laudamur",
+          second: "laudamini",
+          third: "laudantur"
         }
       }
     }, 
     imperfectum: {
       activus: {
         singularis: {
-          first: "laborabam",
-          second: "laborabas",
-          third: "laborabat"
+          first: "laudabam",
+          second: "laudabas",
+          third: "laudabat"
         },
         pluralis: {
-          first: "laborabamus",
-          second: "laborabatis",
-          third: "laborabant"
+          first: "laudabamus",
+          second: "laudabatis",
+          third: "laudabant"
+        }
+      }, 
+      passivus: {
+        singularis: {
+          first: "laudabar",
+          second: "laudabaris",
+          third: "laudabatur"
+        },
+        pluralis: {
+          first: "laudabamur",
+          second: "laudabamini",
+          third: "laudabantur"
         }
       }
     }, 
     futurumPrimum: {
       activus: {
         singularis: {
-          first: "laborabo",
-          second: "laborabis",
-          third: "laborabit"
+          first: "laudabo",
+          second: "laudabis",
+          third: "laudabit"
         },
         pluralis: {
-          first: "laborabimus",
-          second: "laborabitis",
-          third: "laborabunt"
+          first: "laudabimus",
+          second: "laudabitis",
+          third: "laudabunt"
+        }
+      },
+      passivus: {
+        singularis: {
+          first: "laudabor",
+          second: "laudaberis",
+          third: "laudabitur"
+        },
+        pluralis: {
+          first: "laudabimur",
+          second: "laudabimini",
+          third: "laudabuntur"
         }
       }
     }
@@ -380,10 +404,18 @@ const firstConjugation = {
     praesens: {
       activus: {
         singularis: {
-          second: "labora"
+          second: "lauda"
         },
         pluralis: {
-          second: "laborate"
+          second: "laudate"
+        }
+      }, 
+      passivus: {
+        singularis: {
+          second: "laudare"
+        },
+        pluralis: {
+          second: "laudamini"
         }
       }
     }
@@ -404,6 +436,18 @@ const secondConjugation = {
           second: "monetis",
           third: "monent"
         }
+      },
+      passivus: {
+        singularis: {
+          first: "moneor",
+          second: "moneris",
+          third: "monetur"
+        },
+        pluralis: {
+          first: "monemur",
+          second: "monemini",
+          third: "monentur"
+        }
       }
     }, 
     imperfectum: {
@@ -417,6 +461,18 @@ const secondConjugation = {
           first: "monebamus",
           second: "monebatis",
           third: "monebant"
+        }
+      },
+      passivus: {
+        singularis: {
+          first: "monebar",
+          second: "monebaris",
+          third: "monebatur"
+        },
+        pluralis: {
+          first: "monebamur",
+          second: "monebamini",
+          third: "monebantur"
         }
       }
     }, 
@@ -432,6 +488,18 @@ const secondConjugation = {
           second: "monebitis",
           third: "monebunt"
         }
+      },
+      passivus: {
+        singularis: {
+          first: "monebor",
+          second: "moneberis",
+          third: "monebitur"
+        },
+        pluralis: {
+          first: "monebimur",
+          second: "monebimini",
+          third: "monebuntur"
+        }
       }
     }
   },
@@ -443,6 +511,14 @@ const secondConjugation = {
         },
         pluralis: {
           second: "monete"
+        }
+      },
+      activus: {
+        singularis: {
+          second: "monere"
+        },
+        pluralis: {
+          second: "monemini"
         }
       }
     }
@@ -463,6 +539,18 @@ const thirdConjugation = {
           second: "legitis",
           third: "legunt"
         }
+      },
+      passivus: {
+        singularis: {
+          first: "legor",
+          second: "legeris",
+          third: "legitur"
+        },
+        pluralis: {
+          first: "legimur",
+          second: "legimini",
+          third: "leguntur"
+        }
       }
     }, 
     imperfectum: {
@@ -476,6 +564,18 @@ const thirdConjugation = {
           first: "legebamus",
           second: "legebatis",
           third: "legebant"
+        }
+      },
+      passivus: {
+        singularis: {
+          first: "legebar",
+          second: "legebaris",
+          third: "legebatur"
+        },
+        pluralis: {
+          first: "legebamur",
+          second: "legebamini",
+          third: "legebantur"
         }
       }
     }, 
@@ -491,6 +591,18 @@ const thirdConjugation = {
           second: "legetis",
           third: "legent"
         }
+      },
+      passivus: {
+        singularis: {
+          first: "legar",
+          second: "legeris",
+          third: "legetur"
+        },
+        pluralis: {
+          first: "legemur",
+          second: "legemini",
+          third: "legentur"
+        }
       }
     }
   },
@@ -502,6 +614,14 @@ const thirdConjugation = {
         },
         pluralis: {
           second: "legite"
+        }
+      },
+      activus: {
+        singularis: {
+          second: "legere"
+        },
+        pluralis: {
+          second: "legimini"
         }
       }
     }
@@ -522,6 +642,18 @@ const fourthConjugation = {
           second: "auditis",
           third: "audiunt"
         }
+      },
+      passivus: {
+        singularis: {
+          first: "audior",
+          second: "audiris",
+          third: "auditur"
+        },
+        pluralis: {
+          first: "audimur",
+          second: "audimini",
+          third: "audiuntur"
+        }
       }
     }, 
     imperfectum: {
@@ -535,6 +667,18 @@ const fourthConjugation = {
           first: "audiebamus",
           second: "audiebatis",
           third: "audiebant"
+        }
+      },
+      passivus: {
+        singularis: {
+          first: "audiebar",
+          second: "audiebaris",
+          third: "audiebatur"
+        },
+        pluralis: {
+          first: "audiebamur",
+          second: "audiebamini",
+          third: "audiebantur"
         }
       }
     }, 
@@ -550,6 +694,18 @@ const fourthConjugation = {
           second: "audietis",
           third: "audient"
         }
+      },
+      passivus: {
+        singularis: {
+          first: "audiar",
+          second: "audieris",
+          third: "audietur"
+        },
+        pluralis: {
+          first: "audiemur",
+          second: "audiemini",
+          third: "audientur"
+        }
       }
     }
   },
@@ -561,6 +717,14 @@ const fourthConjugation = {
         },
         pluralis: {
           second: "audite"
+        }
+      }, 
+      passivus: {
+        singularis: {
+          second: "audire"
+        },
+        pluralis: {
+          second: "audimini"
         }
       }
     }
@@ -652,6 +816,7 @@ document.getElementById('random-verb-form').onsubmit = function(e) {
   const futureITense = formData.get("tense-futureI"); 
 
   const activeVoice = formData.get("voice-active"); 
+  const passiveVoice = formData.get("voice-passive");
 
   const numberSingularis = formData.get("number-singularis");
   const numberPluralis = formData.get("number-pluralis");
@@ -663,7 +828,7 @@ document.getElementById('random-verb-form').onsubmit = function(e) {
   const conjugationsIncluded = [firstConjugation, secondConjugation, thirdConjugation, fourthConjugation].filter(n => n);
   const moodsIncluded = [indicativeMood, imperativeMood].filter(n => n);
   const tensesIncluded = [presentTense, imperfectTense, futureITense].filter(n => n);
-  const voicesIncluded = [activeVoice].filter(n => n);
+  const voicesIncluded = [activeVoice, passiveVoice].filter(n => n);
   const numbersIncluded = [numberSingularis, numberPluralis].filter(n => n);
   const personsIncluded  = [firstPerson, secondPerson, thirdPerson].filter(n => n);
 
