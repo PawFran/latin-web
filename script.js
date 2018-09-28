@@ -398,6 +398,20 @@ const firstConjugation = {
           third: "laudabuntur"
         }
       }
+    },
+    perfectum: {
+      activus: {
+        singularis: {
+          first: "laudavi",
+          second: "laudavisti",
+          third: "laudavit"
+        },
+        pluralis: {
+          first: "laudavimus",
+          second: "laudavistis",
+          third: "laudaverunt"
+        }
+      }
     }
   },
   imperativus: {
@@ -499,6 +513,20 @@ const secondConjugation = {
           first: "monebimur",
           second: "monebimini",
           third: "monebuntur"
+        }
+      }
+    },
+    perfectum: {
+      activus: {
+        singularis: {
+          first: "monui",
+          second: "monuisti",
+          third: "monuit"
+        },
+        pluralis: {
+          first: "monuimus",
+          second: "monuistis",
+          third: "monuerunt"
         }
       }
     }
@@ -604,6 +632,20 @@ const thirdConjugation = {
           third: "legentur"
         }
       }
+    },
+    perfectum: {
+      activus: {
+        singularis: {
+          first: "legavi",
+          second: "legavisti",
+          third: "legavit"
+        },
+        pluralis: {
+          first: "legavimus",
+          second: "legavistis",
+          third: "legaverunt"
+        }
+      }
     }
   },
   imperativus: {
@@ -705,6 +747,20 @@ const fourthConjugation = {
           first: "audiemur",
           second: "audiemini",
           third: "audientur"
+        }
+      }
+    },
+    perfectum: {
+      activus: {
+        singularis: {
+          first: "audivi",
+          second: "audivisti",
+          third: "audivit"
+        },
+        pluralis: {
+          first: "audivimus",
+          second: "audivistis",
+          third: "audiverunt"
         }
       }
     }
@@ -814,6 +870,7 @@ document.getElementById('random-verb-form').onsubmit = function(e) {
   const presentTense = formData.get("tense-present");
   const imperfectTense = formData.get("tense-imperfect"); 
   const futureITense = formData.get("tense-futureI"); 
+  const perfectTense = formData.get("tense-perfect"); 
 
   const activeVoice = formData.get("voice-active"); 
   const passiveVoice = formData.get("voice-passive");
@@ -827,7 +884,7 @@ document.getElementById('random-verb-form').onsubmit = function(e) {
 
   const conjugationsIncluded = [firstConjugation, secondConjugation, thirdConjugation, fourthConjugation].filter(n => n);
   const moodsIncluded = [indicativeMood, imperativeMood].filter(n => n);
-  const tensesIncluded = [presentTense, imperfectTense, futureITense].filter(n => n);
+  const tensesIncluded = [presentTense, imperfectTense, futureITense, perfectTense].filter(n => n);
   const voicesIncluded = [activeVoice, passiveVoice].filter(n => n);
   const numbersIncluded = [numberSingularis, numberPluralis].filter(n => n);
   const personsIncluded  = [firstPerson, secondPerson, thirdPerson].filter(n => n);
