@@ -333,6 +333,46 @@ const firstConjugation = {
           second: "laboratis",
           third: "laborant"
         }
+      },
+      passivus: {
+        singularis: {
+          first: "laboro",
+          second: "laboras",
+          third: "laborat"
+        },
+        pluralis: {
+          first: "laboramus",
+          second: "laboratis",
+          third: "laborant"
+        }
+      }
+    }, 
+    imperfectum: {
+      activus: {
+        singularis: {
+          first: "laborabam",
+          second: "laborabas",
+          third: "laborabat"
+        },
+        pluralis: {
+          first: "laborabamus",
+          second: "laborabatis",
+          third: "laborabant"
+        }
+      }
+    }, 
+    futurumPrimum: {
+      activus: {
+        singularis: {
+          first: "laborabo",
+          second: "laborabis",
+          third: "laborabit"
+        },
+        pluralis: {
+          first: "laborabimus",
+          second: "laborabitis",
+          third: "laborabunt"
+        }
       }
     }
   },
@@ -363,6 +403,34 @@ const secondConjugation = {
           first: "monemus",
           second: "monetis",
           third: "monent"
+        }
+      }
+    }, 
+    imperfectum: {
+      activus: {
+        singularis: {
+          first: "monebam",
+          second: "monebas",
+          third: "monebat"
+        },
+        pluralis: {
+          first: "monebamus",
+          second: "monebatis",
+          third: "monebant"
+        }
+      }
+    }, 
+    futurumPrimum: {
+      activus: {
+        singularis: {
+          first: "monebo",
+          second: "monebis",
+          third: "monebit"
+        },
+        pluralis: {
+          first: "monebimus",
+          second: "monebitis",
+          third: "monebunt"
         }
       }
     }
@@ -396,6 +464,34 @@ const thirdConjugation = {
           third: "legunt"
         }
       }
+    }, 
+    imperfectum: {
+      activus: {
+        singularis: {
+          first: "legebam",
+          second: "legebas",
+          third: "legebat"
+        },
+        pluralis: {
+          first: "legebamus",
+          second: "legebatis",
+          third: "legebant"
+        }
+      }
+    }, 
+    futurumPrimum: {
+      activus: {
+        singularis: {
+          first: "legam",
+          second: "leges",
+          third: "leget"
+        },
+        pluralis: {
+          first: "legemus",
+          second: "legetis",
+          third: "legent"
+        }
+      }
     }
   },
   imperativus: {
@@ -427,6 +523,34 @@ const fourthConjugation = {
           third: "audiunt"
         }
       }
+    }, 
+    imperfectum: {
+      activus: {
+        singularis: {
+          first: "audiebam",
+          second: "audiebas",
+          third: "audiebat"
+        },
+        pluralis: {
+          first: "audiebamus",
+          second: "audiebatis",
+          third: "audiebant"
+        }
+      }
+    }, 
+    futurumPrimum: {
+      activus: {
+        singularis: {
+          first: "audiam",
+          second: "audies",
+          third: "audiet"
+        },
+        pluralis: {
+          first: "audiemus",
+          second: "audietis",
+          third: "audient"
+        }
+      }
     }
   },
   imperativus: {
@@ -448,7 +572,7 @@ const conjugationTree = {
   second: secondConjugation,
   third: thirdConjugation,
   fourth: fourthConjugation
-}
+};
 
 function randomKey(obj) {
     const keys = Object.keys(obj);
@@ -458,7 +582,7 @@ function randomKey(obj) {
 function randomKeyWithFilter(obj, allowableValues) {
   const keys = Object.keys(obj).filter(value => -1 !== allowableValues.indexOf(value));
   return keys[ keys.length * Math.random() << 0 ];
-}
+};
 
 function randomNounWithDescription() {
   const res = {};
@@ -484,7 +608,7 @@ function randomVerbWithDescription() {
   res.word = conjugationTree[res.conjugation][res.mood][res.tense][res.voice][res.number][res.person];
 
   return res;
-}
+};
 
 function randomVerbAdvanced(conjugationsIncluded, moodsIncluded, tensesIncluded, voicesIncluded, numbersIncluded, personsIncluded) {
   currentWord = randomVerbWithDescriptionAdvanced(conjugationsIncluded, moodsIncluded, tensesIncluded, voicesIncluded, numbersIncluded, personsIncluded);
@@ -508,7 +632,7 @@ function randomVerbWithDescriptionAdvanced(conjugationsIncluded, moodsIncluded, 
   res.word = conjugationTree[res.conjugation][res.mood][res.tense][res.voice][res.number][res.person];
 
   return res;
-}
+};
 
 // *** GENERATIVE FORMS ***
 document.getElementById('random-verb-form').onsubmit = function(e) {
@@ -523,7 +647,9 @@ document.getElementById('random-verb-form').onsubmit = function(e) {
   const indicativeMood = formData.get("mood-indicative");
   const imperativeMood = formData.get("mood-imperative"); 
 
-  const presentTense = formData.get("tense-present"); 
+  const presentTense = formData.get("tense-present");
+  const imperfectTense = formData.get("tense-imperfect"); 
+  const futureITense = formData.get("tense-futureI"); 
 
   const activeVoice = formData.get("voice-active"); 
 
@@ -536,17 +662,17 @@ document.getElementById('random-verb-form').onsubmit = function(e) {
 
   const conjugationsIncluded = [firstConjugation, secondConjugation, thirdConjugation, fourthConjugation].filter(n => n);
   const moodsIncluded = [indicativeMood, imperativeMood].filter(n => n);
-  const tensesIncluded = [presentTense].filter(n => n);
+  const tensesIncluded = [presentTense, imperfectTense, futureITense].filter(n => n);
   const voicesIncluded = [activeVoice].filter(n => n);
   const numbersIncluded = [numberSingularis, numberPluralis].filter(n => n);
   const personsIncluded  = [firstPerson, secondPerson, thirdPerson].filter(n => n);
 
-  // console.log("conjugations included: " + conjugationsIncluded);
-  // console.log("moods included: " + moodsIncluded);
-  // console.log("tenses included: " + tensesIncluded);
-  // console.log("voices included: " + voicesIncluded);
-  // console.log("numbers included: " + numbersIncluded);
-  // console.log("persons included: " + personsIncluded);
+  console.log("conjugations included: " + conjugationsIncluded);
+  console.log("moods included: " + moodsIncluded);
+  console.log("tenses included: " + tensesIncluded);
+  console.log("voices included: " + voicesIncluded);
+  console.log("numbers included: " + numbersIncluded);
+  console.log("persons included: " + personsIncluded);
 
   randomVerbAdvanced(conjugationsIncluded, moodsIncluded, tensesIncluded, voicesIncluded, numbersIncluded, personsIncluded);
 };
@@ -611,8 +737,8 @@ function isCorrectNoun(declension, gender, number, grammaticalCase) {
   // some declensions doesn't have every genders. warning: possible to lose sight of some errors here
   return declensionTree[declension][gender] !== undefined 
     && declensionTree[declension][gender][number][grammaticalCase] === currentWord.word
-}
+};
 
 function isCorrectVerb(conjugation, mood, tense, voice, number, person) {
   return conjugationTree[conjugation][mood][tense][voice][number][person] === currentWord.word
-}
+};
