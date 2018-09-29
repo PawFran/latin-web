@@ -220,7 +220,7 @@ const secondConjugation = {
           second: "monete"
         }
       },
-      activus: {
+      passivus: {
         singularis: {
           second: "monere"
         },

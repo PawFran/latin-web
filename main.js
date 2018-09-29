@@ -1,5 +1,8 @@
-import {declensionTree} from "./declension.js"
-import {conjugationTree} from "./conjugation.js"
+import {declensionTree} from "./declension.js";
+import {conjugationTree} from "./conjugation.js";
+import {randomKey, randomKeyWithFilter} from "./random.js";
+import {loadPage} from "./lib.js";
+import {randomNounWithDescription, randomVerbWithDescription, randomVerbWithDescriptionAdvanced} from "./randomWordGenerator.js";
 
 window.onload = function() {
   registerButtons();
@@ -14,11 +17,11 @@ function registerButtons() {
   };
 
   document.getElementById("random-noun").onclick = function() {
-    randomNoun();
+    generateRandomNounBasic();
   };
 
   document.getElementById("random-verb").onclick = function() {
-    randomVerb();
+    generateRandomVerbBasic();
   };
 
   document.getElementById("clear").onclick = function() {
@@ -41,7 +44,7 @@ function showNouns() {
   document.getElementById("feedback-message").innerHTML = "";
 };
 
-function randomNoun() {
+function generateRandomNounBasic() {
   currentWord = randomNounWithDescription();
 
   const placeholder = document.getElementById("placeholder");
@@ -53,7 +56,7 @@ function randomNoun() {
   document.getElementById("feedback-message").innerHTML = "";
 };
 
-function randomVerb() {
+function generateRandomVerbBasic() {
   currentWord = randomVerbWithDescription();
 
   const placeholder = document.getElementById("placeholder");
@@ -80,50 +83,7 @@ function clear() {
   document.getElementById("feedback-message").innerHTML = "";
 };
 
-function loadPage(href){
-  const xmlhttp = new XMLHttpRequest();
-  xmlhttp.open("GET", href, false);
-  xmlhttp.send();
-  return xmlhttp.responseText;
-};
-
 let currentWord;
-
-function randomKey(obj) {
-    const keys = Object.keys(obj);
-    return keys[ keys.length * Math.random() << 0 ];
-};
-
-function randomKeyWithFilter(obj, allowableValues) {
-  const keys = Object.keys(obj).filter(value => -1 !== allowableValues.indexOf(value));
-  return keys[ keys.length * Math.random() << 0 ];
-};
-
-function randomNounWithDescription() {
-  const res = {};
-
-  res.declension = randomKey(declensionTree);
-  res.gender = randomKey(declensionTree[res.declension]);
-  res.number = randomKey(declensionTree[res.declension][res.gender]);
-  res.grammaticalCase = randomKey(declensionTree[res.declension][res.gender][res.number]);
-  res.word = declensionTree[res.declension][res.gender][res.number][res.grammaticalCase];
-
-  return res;
-};
-
-function randomVerbWithDescription() {
-  const res = {};
-
-  res.conjugation = randomKey(conjugationTree);
-  res.mood = randomKey(conjugationTree[res.conjugation]);
-  res.tense = randomKey(conjugationTree[res.conjugation][res.mood]);
-  res.voice = randomKey(conjugationTree[res.conjugation][res.mood][res.tense]);
-  res.number = randomKey(conjugationTree[res.conjugation][res.mood][res.tense][res.voice]);
-  res.person = randomKey(conjugationTree[res.conjugation][res.mood][res.tense][res.voice][res.number]);
-  res.word = conjugationTree[res.conjugation][res.mood][res.tense][res.voice][res.number][res.person];
-
-  return res;
-};
 
 function randomVerbAdvanced(conjugationsIncluded, moodsIncluded, tensesIncluded, voicesIncluded, numbersIncluded, personsIncluded) {
   currentWord = randomVerbWithDescriptionAdvanced(conjugationsIncluded, moodsIncluded, tensesIncluded, voicesIncluded, numbersIncluded, personsIncluded);
@@ -133,20 +93,6 @@ function randomVerbAdvanced(conjugationsIncluded, moodsIncluded, tensesIncluded,
 
   document.getElementById("verb-form").hidden = false;
   document.getElementById("noun-form").hidden = true;
-};
-
-function randomVerbWithDescriptionAdvanced(conjugationsIncluded, moodsIncluded, tensesIncluded, voicesIncluded, numbersIncluded, personsIncluded) {
-  const res = {};
-  
-  res.conjugation = randomKeyWithFilter(conjugationTree, conjugationsIncluded);
-  res.mood = randomKeyWithFilter(conjugationTree[res.conjugation], moodsIncluded);
-  res.tense = randomKeyWithFilter(conjugationTree[res.conjugation][res.mood], tensesIncluded);
-  res.voice = randomKeyWithFilter(conjugationTree[res.conjugation][res.mood][res.tense], voicesIncluded);
-  res.number = randomKeyWithFilter(conjugationTree[res.conjugation][res.mood][res.tense][res.voice], numbersIncluded);
-  res.person = randomKeyWithFilter(conjugationTree[res.conjugation][res.mood][res.tense][res.voice][res.number], personsIncluded);
-  res.word = conjugationTree[res.conjugation][res.mood][res.tense][res.voice][res.number][res.person];
-
-  return res;
 };
 
 // *** GENERATIVE FORMS ***
@@ -214,7 +160,7 @@ document.getElementById('noun-form').onsubmit = function(e) {
 
   const feedback = document.getElementById("feedback-message");
 
-  const isCorrect = isCorrectNoun(declension, gender, number, grammaticalCase);
+  const isCorrect = isCorrectNoun(declension, gender, number, grammaticalCase, currentWord.word);
   if (isCorrect) {
     feedback.innerHTML = "correct";
   } else {
@@ -245,7 +191,7 @@ document.getElementById('verb-form').onsubmit = function(e) {
 
   const feedback = document.getElementById("feedback-message");
 
-  const isCorrect = isCorrectVerb(conjugation, mood, tense, voice, number, person);
+  const isCorrect = isCorrectVerb(conjugation, mood, tense, voice, number, person, currentWord.word);
   if (isCorrect) {
     feedback.innerHTML ="correct";
   } else {
@@ -257,12 +203,12 @@ document.getElementById('verb-form').onsubmit = function(e) {
 };
 
 // *** FEEDBACK ***
-function isCorrectNoun(declension, gender, number, grammaticalCase) {
+function isCorrectNoun(declension, gender, number, grammaticalCase, correctWord) {
   // some declensions doesn't have every genders. warning: possible to lose sight of some errors here
   return declensionTree[declension][gender] !== undefined 
-    && declensionTree[declension][gender][number][grammaticalCase] === currentWord.word
+    && declensionTree[declension][gender][number][grammaticalCase] === correctWord
 };
 
-function isCorrectVerb(conjugation, mood, tense, voice, number, person) {
-  return conjugationTree[conjugation][mood][tense][voice][number][person] === currentWord.word
+function isCorrectVerb(conjugation, mood, tense, voice, number, person, correctWord) {
+  return conjugationTree[conjugation][mood][tense][voice][number][person] === correctWord
 };
