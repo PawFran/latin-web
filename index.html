@@ -114,6 +114,9 @@
             <button id="random-verb">Random verb - basic</button>
           </div>
           <div class="row mt-3">
+            <button id="random-pronoun-personal">Random personal pronoun - basic</button>
+          </div>
+          <div class="row mt-3">
             <button id="show-nouns">Show nouns</button>
           </div>
           <div class="row mt-3">
@@ -125,6 +128,59 @@
           <div class="col-sm-12" id="placeholder">
             <!-- intentionally left blank -->
           </div>
+          <form hidden id="pronoun-personal-form" class="col-sm-12" action="/">
+            <div class="form-group">Number:
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="number" id="pronoun-personal-number-singularis" value="singularis" required>
+                <label class="form-check-label" for="pronoun-personal-number-singularis">sing</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="number" id="pronoun-personal-number-pluralis" value="pluralis">
+                <label class="form-check-label" for="pronoun-personal-number-pluralis">pl</label>
+              </div>
+            </div>
+            <div class="form-group">Person:
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="person" id="pronoun-personal-person-first" value="first" required>
+                <label class="form-check-label" for="pronoun-personal-person-first">first</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="person" id="pronoun-personal-person-second" value="second">
+                <label class="form-check-label" for="pronoun-personal-person-second">second</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="person" id="pronoun-personal-person-third" value="third">
+                <label class="form-check-label" for="pronoun-personal-person-third">third</label>
+              </div>
+            </div>
+            <div class="form-group">Case:
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="case" id="pronoun-personal-case-nominativus" value="nominativus" required>
+                <label class="form-check-label" for="pronoun-personal-case-nominativus">nom</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="case" id="pronoun-personal-case-genetivus" value="genetivus">
+                <label class="form-check-label" for="pronoun-personal-case-genetivus">gen</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="case" id="pronoun-personal-case-dativus" value="dativus">
+                <label class="form-check-label" for="pronoun-personal-case-dativus">dat</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="case" id="pronoun-personal-case-accusativus" value="accusativus">
+                <label class="form-check-label" for="pronoun-personal-case-accusativus">acc</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="case" id="pronoun-personal-case-ablativus" value="ablativus">
+                <label class="form-check-label" for="pronoun-personal-case-ablativus">abl</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="case" id="pronoun-personal-case-vocativus" value="vocativus">
+                <label class="form-check-label" for="pronoun-personal-case-vocativus">voc</label>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Feedback</button>
+          </form>
           <form hidden id="verb-form" class="col-sm-12" action="/">
             <div class="form-group">Conjugation:
               <div class="form-check form-check-inline">

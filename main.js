@@ -1,13 +1,15 @@
-import {declensionTree} from "./declension.js";
-import {conjugationTree} from "./conjugation.js";
+import {nounDeclensionTree} from "./noun.js";
+import {verbConjugationTree} from "./verb.js";
+import {personalPronounTree} from "./pronoun.js";
 import {randomKey, randomKeyWithFilter} from "./random.js";
 import {loadPage} from "./lib.js";
-import {randomNounWithDescription, randomVerbWithDescription, randomVerbWithDescriptionAdvanced} from "./randomWordGenerator.js";
+import {randomNounWithDescription, randomVerbWithDescription, randomVerbWithDescriptionAdvanced, randomPersonalPronounWithDescription} from "./randomWordGenerator.js";
 
 window.onload = function() {
   registerButtons();
   document.getElementById("noun-form").hidden = true;
   document.getElementById("verb-form").hidden = true;
+  document.getElementById("pronoun-personal-form").hidden = true;
 };
 
 // *** BUTTONS ***
@@ -24,6 +26,10 @@ function registerButtons() {
     generateRandomVerbBasic();
   };
 
+  document.getElementById("random-pronoun-personal").onclick = function() {
+    generateRandomPersonalPronounBasic();
+  };
+
   document.getElementById("clear").onclick = function() {
     clearRightSide();
   };
@@ -36,6 +42,10 @@ function showNouns() {
   clearFormsAndFeedback(); 
 };
 
+function generateRandomPersonalPronounBasic() {
+  generateRandomWordBasic(randomPersonalPronounWithDescription, "pronoun-personal-form");
+};
+
 function generateRandomNounBasic() {
   generateRandomWordBasic(randomNounWithDescription, "noun-form");
 };
@@ -44,7 +54,7 @@ function generateRandomVerbBasic() {
   generateRandomWordBasic(randomVerbWithDescription, "verb-form");
 };
 
-function generateRandomWordBasic(generativeFunction, formLabel) {
+function generateRandomWordBasic(generativeFunction, formId) {
   currentWord = generativeFunction();
 
   const placeholder = document.getElementById("placeholder");
@@ -52,7 +62,7 @@ function generateRandomWordBasic(generativeFunction, formLabel) {
 
   clearFormsAndFeedback();
 
-  document.getElementById(formLabel).hidden = false;
+  document.getElementById(formId).hidden = false;
 };
 
 function clearRightSide() {
@@ -63,21 +73,22 @@ function clearRightSide() {
 };
 
 function clearFormsAndFeedback() {
-  const nounForm = document.getElementById("noun-form");
-  nounForm.hidden = true;
-  nounForm.reset();
+  const clearForm = (id) => {
+    document.getElementById(id).hidden = true;
+    document.getElementById(id).reset();
+  } 
 
-  const verbForm = document.getElementById("verb-form");
-  verbForm.hidden = true;
-  verbForm.reset()
+  clearForm("noun-form");
+  clearForm("verb-form");
+  clearForm("pronoun-personal-form");
 
   document.getElementById("feedback-message").innerHTML = "";
-}
+};
 
 let currentWord;
 
 // *** GENERATIVE FORMS ***
-document.getElementById('random-verb-form').onsubmit = function(e) {
+document.getElementById("random-verb-form").onsubmit = function(e) {
   e.preventDefault();
 
   document.getElementById("feedback-message").innerHTML ="";
@@ -135,7 +146,7 @@ function randomVerbAdvanced(conjugationsIncluded, moodsIncluded, tensesIncluded,
 };
 
 // *** GUESSING FORMS ***
-document.getElementById('noun-form').onsubmit = function(e) {
+document.getElementById("noun-form").onsubmit = function(e) {
   e.preventDefault();
   const formData = new FormData(e.target);
 
@@ -162,7 +173,7 @@ document.getElementById('noun-form').onsubmit = function(e) {
   }
 };
 
-document.getElementById('verb-form').onsubmit = function(e) {
+document.getElementById("verb-form").onsubmit = function(e) {
   e.preventDefault();
   const formData = new FormData(e.target);
 
@@ -193,13 +204,40 @@ document.getElementById('verb-form').onsubmit = function(e) {
   }
 };
 
+document.getElementById("pronoun-personal-form").onsubmit = function(e) {
+  e.preventDefault();
+  const formData = new FormData(e.target);
+
+  const number = formData.get("number");
+  const person = formData.get("person");
+  const grammaticalCase = formData.get("case");
+
+  // console.log("number: " + number);
+  // console.log("person: " + person);
+  // console.log("case: " + grammaticalCase);
+
+  const feedback = document.getElementById("feedback-message");
+
+  const isCorrect = isCorrectPronoun(number, person, grammaticalCase, currentWord.word);
+  if (isCorrect) {
+    feedback.innerHTML ="correct";
+  } else {
+    feedback.innerHTML = "incorrect. given answer: number " + number + " person " + person + " case " + grammaticalCase + "<br>" +
+      "correct answer would be: number " + currentWord.conjugation + " person " + currentWord.person + " case " + currentWord.grammaticalCase;
+  }
+};
+
 // *** FEEDBACK ***
 function isCorrectNoun(declension, gender, number, grammaticalCase, correctWord) {
   // some declensions doesn't have every genders. warning: possible to lose sight of some errors here
-  return declensionTree[declension][gender] !== undefined 
-    && declensionTree[declension][gender][number][grammaticalCase] === correctWord
+  return nounDeclensionTree[declension][gender] !== undefined 
+    && nounDeclensionTree[declension][gender][number][grammaticalCase] === correctWord
 };
 
 function isCorrectVerb(conjugation, mood, tense, voice, number, person, correctWord) {
-  return conjugationTree[conjugation][mood][tense][voice][number][person] === correctWord
+  return verbConjugationTree[conjugation][mood][tense][voice][number][person] === correctWord
 };
+
+function isCorrectPronoun(number, person, grammaticalCase, correctWord) {
+  return personalPronounTree[number][person][grammaticalCase] === correctWord;
+}
