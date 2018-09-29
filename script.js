@@ -26,7 +26,16 @@ function registerButtons() {
 function showNouns() {
 	const placeholder = document.getElementById("placeholder");
 	placeholder.innerHTML = loadPage("nouns-table.html");
-  document.getElementById("noun-form").hidden = true;
+  
+  const nounForm = document.getElementById("noun-form");
+  nounForm.hidden = true;
+  nounForm.reset();
+
+  const verbForm = document.getElementById("verb-form");
+  verbForm.hidden = true;
+  verbForm.reset()
+
+  document.getElementById("feedback-message").innerHTML = "";
 };
 
 function randomNoun() {
@@ -37,6 +46,8 @@ function randomNoun() {
 
   document.getElementById("noun-form").hidden = false;
   document.getElementById("verb-form").hidden = true;
+
+  document.getElementById("feedback-message").innerHTML = "";
 };
 
 function randomVerb() {
@@ -47,6 +58,8 @@ function randomVerb() {
 
   document.getElementById("verb-form").hidden = false;
   document.getElementById("noun-form").hidden = true;
+
+  document.getElementById("feedback-message").innerHTML = "";
 };
 
 function clear() {
@@ -60,6 +73,8 @@ function clear() {
   const verbForm = document.getElementById("verb-form");
   verbForm.hidden = true;
   verbForm.reset()
+
+  document.getElementById("feedback-message").innerHTML = "";
 };
 
 function loadPage(href){
@@ -857,6 +872,9 @@ function randomVerbWithDescriptionAdvanced(conjugationsIncluded, moodsIncluded, 
 // *** GENERATIVE FORMS ***
 document.getElementById('random-verb-form').onsubmit = function(e) {
   e.preventDefault();
+
+  document.getElementById("feedback-message").innerHTML ="";
+
   const formData = new FormData(e.target);
 
   const firstConjugation = formData.get("first-conjugation");
@@ -914,14 +932,16 @@ document.getElementById('noun-form').onsubmit = function(e) {
   // console.log("number: " + number);
   // console.log("case: " + grammaticalCase);
 
-  const feedback = isCorrectNoun(declension, gender, number, grammaticalCase);
-  if (feedback) {
-    console.log("correct");
+  const feedback = document.getElementById("feedback-message");
+
+  const isCorrect = isCorrectNoun(declension, gender, number, grammaticalCase);
+  if (isCorrect) {
+    feedback.innerHTML = "correct";
   } else {
-    console.log("incorrect. given answer: declension " + declension + " gender " + gender + " number " + number 
-      + " case " + grammaticalCase);
-    console.log("correct answer would be: declension " + currentWord.declension + " gender " + 
-      currentWord.gender + " number " + currentWord.number + " case " + currentWord.grammaticalCase);
+    feedback.innerHTML = "incorrect. given answer: declension " + declension + " gender " + gender + " number " + number 
+      + " case " + grammaticalCase + "<br>" 
+      + "correct answer would be: declension " + currentWord.declension + " gender " + 
+      currentWord.gender + " number " + currentWord.number + " case " + currentWord.grammaticalCase;
   }
 };
 
@@ -943,14 +963,16 @@ document.getElementById('verb-form').onsubmit = function(e) {
   // console.log("number: " + number);
   // console.log("person: " + person);
 
-  const feedback = isCorrectVerb(conjugation, mood, tense, voice, number, person);
-  if (feedback) {
-    console.log("correct");
+  const feedback = document.getElementById("feedback-message");
+
+  const isCorrect = isCorrectVerb(conjugation, mood, tense, voice, number, person);
+  if (isCorrect) {
+    feedback.innerHTML ="correct";
   } else {
-    console.log("incorrect. given answer: conjugation " + conjugation + " mood " + mood + " tense " + tense + " voice " + voice
-      + " number " + number + " person " + person);
-    console.log("correct answer would be: conjugation " + currentWord.conjugation + " mood " + currentWord.mood + " tense " 
-      + currentWord.tense + " voice " + currentWord.voice+ " number " + currentWord.number + " person " + currentWord.person);
+    feedback.innerHTML = "incorrect. given answer: conjugation " + conjugation + " mood " + mood + " tense " + tense + " voice " 
+      + voice + " number " + number + " person " + person + "<br>" + 
+      "correct answer would be: conjugation " + currentWord.conjugation + " mood " + currentWord.mood + " tense " 
+      + currentWord.tense + " voice " + currentWord.voice + " number " + currentWord.number + " person " + currentWord.person;
   }
 };
 
