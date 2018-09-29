@@ -25,7 +25,7 @@ function registerButtons() {
   };
 
   document.getElementById("clear").onclick = function() {
-    clear();
+    clearRightSide();
   };
 };
 
@@ -33,45 +33,36 @@ function showNouns() {
 	const placeholder = document.getElementById("placeholder");
 	placeholder.innerHTML = loadPage("nouns-table.html");
   
-  const nounForm = document.getElementById("noun-form");
-  nounForm.hidden = true;
-  nounForm.reset();
-
-  const verbForm = document.getElementById("verb-form");
-  verbForm.hidden = true;
-  verbForm.reset()
-
-  document.getElementById("feedback-message").innerHTML = "";
+  clearFormsAndFeedback(); 
 };
 
 function generateRandomNounBasic() {
-  currentWord = randomNounWithDescription();
-
-  const placeholder = document.getElementById("placeholder");
-  placeholder.innerHTML = "Word: " + currentWord.word;
-
-  document.getElementById("noun-form").hidden = false;
-  document.getElementById("verb-form").hidden = true;
-
-  document.getElementById("feedback-message").innerHTML = "";
+  generateRandomWordBasic(randomNounWithDescription, "noun-form");
 };
 
 function generateRandomVerbBasic() {
-  currentWord = randomVerbWithDescription();
+  generateRandomWordBasic(randomVerbWithDescription, "verb-form");
+};
+
+function generateRandomWordBasic(generativeFunction, formLabel) {
+  currentWord = generativeFunction();
 
   const placeholder = document.getElementById("placeholder");
   placeholder.innerHTML = "Word: " + currentWord.word;
 
-  document.getElementById("verb-form").hidden = false;
-  document.getElementById("noun-form").hidden = true;
+  clearFormsAndFeedback();
 
-  document.getElementById("feedback-message").innerHTML = "";
+  document.getElementById(formLabel).hidden = false;
 };
 
-function clear() {
+function clearRightSide() {
   document.getElementById("placeholder");
-  placeholder.innerHTML =  "";
+  placeholder.innerHTML = "";
 
+  clearFormsAndFeedback();
+};
+
+function clearFormsAndFeedback() {
   const nounForm = document.getElementById("noun-form");
   nounForm.hidden = true;
   nounForm.reset();
@@ -81,19 +72,9 @@ function clear() {
   verbForm.reset()
 
   document.getElementById("feedback-message").innerHTML = "";
-};
+}
 
 let currentWord;
-
-function randomVerbAdvanced(conjugationsIncluded, moodsIncluded, tensesIncluded, voicesIncluded, numbersIncluded, personsIncluded) {
-  currentWord = randomVerbWithDescriptionAdvanced(conjugationsIncluded, moodsIncluded, tensesIncluded, voicesIncluded, numbersIncluded, personsIncluded);
-
-  const placeholder = document.getElementById("placeholder");
-  placeholder.innerHTML = "Word: " + currentWord.word;
-
-  document.getElementById("verb-form").hidden = false;
-  document.getElementById("noun-form").hidden = true;
-};
 
 // *** GENERATIVE FORMS ***
 document.getElementById('random-verb-form').onsubmit = function(e) {
@@ -141,6 +122,16 @@ document.getElementById('random-verb-form').onsubmit = function(e) {
   // console.log("persons included: " + personsIncluded);
 
   randomVerbAdvanced(conjugationsIncluded, moodsIncluded, tensesIncluded, voicesIncluded, numbersIncluded, personsIncluded);
+};
+
+function randomVerbAdvanced(conjugationsIncluded, moodsIncluded, tensesIncluded, voicesIncluded, numbersIncluded, personsIncluded) {
+  currentWord = randomVerbWithDescriptionAdvanced(conjugationsIncluded, moodsIncluded, tensesIncluded, voicesIncluded, numbersIncluded, personsIncluded);
+
+  const placeholder = document.getElementById("placeholder");
+  placeholder.innerHTML = "Word: " + currentWord.word;
+
+  document.getElementById("verb-form").hidden = false;
+  document.getElementById("noun-form").hidden = true;
 };
 
 // *** GUESSING FORMS ***
