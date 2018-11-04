@@ -47,6 +47,6 @@ export const personalPronounTree = {
 };
 
 // number, gender, person
-const possesivePronoun = {
+const possesivePronounTree = {
 
 }
