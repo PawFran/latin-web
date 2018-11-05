@@ -53,3 +53,17 @@ export function randomVerbWithDescriptionAdvanced(conjugationsIncluded, moodsInc
 
   return res;
 };
+
+export function randomVerbFormula(conjugationsIncluded, moodsIncluded, tensesIncluded, voicesIncluded, numbersIncluded, personsIncluded) {
+  const res = {};
+
+  res.conjugation = randomKeyWithFilter(verbConjugationTree, conjugationsIncluded);
+  res.mood = randomKeyWithFilter(verbConjugationTree[res.conjugation], moodsIncluded);
+  res.tense = randomKeyWithFilter(verbConjugationTree[res.conjugation][res.mood], tensesIncluded);
+  res.voice = randomKeyWithFilter(verbConjugationTree[res.conjugation][res.mood][res.tense], voicesIncluded);
+  res.number = randomKeyWithFilter(verbConjugationTree[res.conjugation][res.mood][res.tense][res.voice], numbersIncluded);
+  res.person = randomKeyWithFilter(verbConjugationTree[res.conjugation][res.mood][res.tense][res.voice][res.number], personsIncluded);
+  res.word = verbConjugationTree[res.conjugation][res.mood][res.tense][res.voice][res.number][res.person];
+
+  return res;
+};

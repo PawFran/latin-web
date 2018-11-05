@@ -1,15 +1,16 @@
 import {nounDeclensionTree} from "./noun.js";
-import {verbConjugationTree} from "./verb.js";
+import {verbConjugationTree, infinitives} from "./verb.js";
 import {personalPronounTree} from "./pronoun.js";
 import {randomKey, randomKeyWithFilter} from "./random.js";
 import {loadPage} from "./lib.js";
-import {randomNounWithDescription, randomVerbWithDescription, randomVerbWithDescriptionAdvanced, randomPersonalPronounWithDescription} from "./randomWordGenerator.js";
+import {randomNounWithDescription, randomVerbWithDescription, randomVerbWithDescriptionAdvanced, randomPersonalPronounWithDescription, randomVerbFormula} from "./randomWordGenerator.js";
 
 window.onload = function() {
   registerButtons();
   document.getElementById("noun-form").hidden = true;
   document.getElementById("verb-form").hidden = true;
   document.getElementById("pronoun-personal-form").hidden = true;
+  document.getElementById("verb-formula-form").hidden = true
 };
 
 // *** BUTTONS ***
@@ -81,11 +82,13 @@ function clearFormsAndFeedback() {
   clearForm("noun-form");
   clearForm("verb-form");
   clearForm("pronoun-personal-form");
+  clearForm("verb-formula-form");
 
   document.getElementById("feedback-message").innerHTML = "";
 };
 
 let currentWord;
+let currentForm;
 
 // *** GENERATIVE FORMS ***
 document.getElementById("random-verb-form").onsubmit = function(e) {
@@ -138,17 +141,101 @@ document.getElementById("random-verb-form").onsubmit = function(e) {
 
 function randomVerbAdvanced(conjugationsIncluded, moodsIncluded, tensesIncluded, voicesIncluded, numbersIncluded, personsIncluded) {
   currentWord = randomVerbWithDescriptionAdvanced(conjugationsIncluded, moodsIncluded, tensesIncluded, voicesIncluded, numbersIncluded, personsIncluded);
-  
-  console.log("current word " + currentWord);
 
   const placeholder = document.getElementById("placeholder");
   placeholder.innerHTML = "Word: " + currentWord.word;
 
   document.getElementById("verb-form").hidden = false;
   document.getElementById("noun-form").hidden = true;
+  document.getElementById("pronoun-personal-form").hidden = true;
+  document.getElementById("verb-formula-form").hidden = true;
+};
+
+document.getElementById("random-verb-formula-form").onsubmit = function(e) {
+  e.preventDefault();
+
+  document.getElementById("feedback-message").innerHTML ="";
+
+  const formData = new FormData(e.target);
+
+  const firstConjugation = formData.get("first-conjugation");
+  const secondConjugation = formData.get("second-conjugation");
+  const thirdConjugationA = formData.get("third-conjugation-a");
+  const thirdConjugationB = formData.get("third-conjugation-b");
+  const fourthConjugation = formData.get("fourth-conjugation");
+
+  const indicativeMood = formData.get("mood-indicative");
+  const imperativeMood = formData.get("mood-imperative"); 
+
+  const presentTense = formData.get("tense-present");
+  const imperfectTense = formData.get("tense-imperfect"); 
+  const futureITense = formData.get("tense-futureI"); 
+  const perfectTense = formData.get("tense-perfect"); 
+
+  const activeVoice = formData.get("voice-active"); 
+  const passiveVoice = formData.get("voice-passive");
+
+  const numberSingularis = formData.get("number-singularis");
+  const numberPluralis = formData.get("number-pluralis");
+
+  const firstPerson = formData.get("person-first");
+  const secondPerson = formData.get("person-second");
+  const thirdPerson = formData.get("person-third");
+
+  const conjugationsIncluded = [firstConjugation, secondConjugation, thirdConjugationA, thirdConjugationB, fourthConjugation].filter(n => n);
+  const moodsIncluded = [indicativeMood, imperativeMood].filter(n => n);
+  const tensesIncluded = [presentTense, imperfectTense, futureITense, perfectTense].filter(n => n);
+  const voicesIncluded = [activeVoice, passiveVoice].filter(n => n);
+  const numbersIncluded = [numberSingularis, numberPluralis].filter(n => n);
+  const personsIncluded  = [firstPerson, secondPerson, thirdPerson].filter(n => n);
+
+  // console.log("conjugations included: " + conjugationsIncluded);
+  // console.log("moods included: " + moodsIncluded);
+  // console.log("tenses included: " + tensesIncluded);
+  // console.log("voices included: " + voicesIncluded);
+  // console.log("numbers included: " + numbersIncluded);
+  // console.log("persons included: " + personsIncluded);
+
+  randomVerbFormulaAdvanced(conjugationsIncluded, moodsIncluded, tensesIncluded, voicesIncluded, numbersIncluded, personsIncluded);
+};
+
+function randomVerbFormulaAdvanced(conjugationsIncluded, moodsIncluded, tensesIncluded, voicesIncluded, numbersIncluded, personsIncluded) {
+  // currentWord = randomVerbWithDescriptionAdvanced(conjugationsIncluded, moodsIncluded, tensesIncluded, voicesIncluded, numbersIncluded, personsIncluded);
+  currentForm = randomVerbFormula(conjugationsIncluded, moodsIncluded, tensesIncluded, voicesIncluded, numbersIncluded, personsIncluded);
+  console.log("currentForm word: " + currentForm.word)
+  const infinitive = infinitives[currentForm.conjugation];
+
+  const placeholder = document.getElementById("placeholder");
+  placeholder.innerHTML = "infinitive: " + infinitive + "<br> mood: " + currentForm.mood 
+  + "<br> tense: " + currentForm.tense + "<br> voice: " + currentForm.voice + "<br> number: " + currentForm.number 
+  + "<br> person: " + currentForm.person;
+
+  document.getElementById("verb-form").hidden = true;
+  document.getElementById("noun-form").hidden = true;
+  document.getElementById("pronoun-personal-form").hidden = true;
+  document.getElementById("verb-formula-form").hidden = false;
 };
 
 // *** GUESSING FORMS ***
+document.getElementById("verb-formula-form").onsubmit = function(e) {
+  e.preventDefault();
+  const formData = new FormData(e.target);
+
+  const answer = formData.get("verb-formula-answer");
+
+  console.log("answer: " + answer);
+
+  const feedback = document.getElementById("feedback-message");
+
+  const isCorrect = isCorrectVerbForm(answer, currentForm.word);
+  if (isCorrect) {
+    feedback.innerHTML ="correct";
+  } else {
+    feedback.innerHTML = "incorrect. given answer: " + answer + "<br>" + 
+      "correct answer would be: " + currentForm.word;
+  }
+};
+
 document.getElementById("noun-form").onsubmit = function(e) {
   e.preventDefault();
   const formData = new FormData(e.target);
@@ -231,6 +318,10 @@ document.getElementById("pronoun-personal-form").onsubmit = function(e) {
 };
 
 // *** FEEDBACK ***
+function isCorrectVerbForm(answer, correctWord) {
+  return answer === currentForm.word;
+};
+
 function isCorrectNoun(declension, gender, number, grammaticalCase, correctWord) {
   // some declensions doesn't have every genders. warning: possible to lose sight of some errors here
   return nounDeclensionTree[declension][gender] !== undefined 

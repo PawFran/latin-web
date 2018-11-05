@@ -1,3 +1,11 @@
+export const infinitives = {
+  "first": "laudare",
+  "second": "monere",
+  "thirdA": "legere",
+  "thirdB": "capere",
+  "fourth": "audire"
+}
+
 const firstConjugation = {
   indicativus: {
     praesens: {

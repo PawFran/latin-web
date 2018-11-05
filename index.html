@@ -21,6 +21,96 @@
           <div class="row">
             <p class="text-center h4 button">Left</p>
           </div>
+          <form class="row mt-3" id="random-verb-formula-form" action="/">
+            <fieldset>
+              <legend>Random verb formula</legend>
+              <div class="form-group">conjugation:
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" name="first-conjugation" id="random-verb-formula-conjugation-first" value="first">
+                  <label class="form-check-label" for="random-verb-formula-conjugation-first">I</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" name="second-conjugation" id="random-verb-formula-conjugation-second" value="second">
+                  <label class="form-check-label" for="random-verb-formula-conjugation-second">II</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" name="third-conjugation-a" id="random-verb-formula-conjugation-third-a" value="thirdA">
+                  <label class="form-check-label" for="random-verb-formula-conjugation-third-a">III a</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" name="third-conjugation-b" id="random-verb-formula-conjugation-third-b" value="thirdB">
+                  <label class="form-check-label" for="random-verb-formula-conjugation-third-b">III b</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" name="fourth-conjugation" id="random-verb-formula-conjugation-fourth" value="fourth">
+                  <label class="form-check-label" for="random-verb-formula-conjugation-fourth">IV</label>
+                </div>
+              </div>
+              <div class="form-group">mood:
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" name="mood-indicative" id="random-verb-formula-mood-indicative" value="indicativus" checked>
+                  <label class="form-check-label" for="random-verb-formula-mood-indicative">indicative</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" name="mood-imperative" id="random-verb-formula-mood-imperative" value="imperativus">
+                  <label class="form-check-label" for="random-verb-formula-mood-imperative">imperative</label>
+                </div>
+              </div>
+              <div class="form-group">tense:
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" name="tense-present" id="random-verb-formula-tense-present" value="praesens">
+                  <label class="form-check-label" for="random-verb-formula-tense-present">praesens</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" name="tense-imperfect" id="random-verb-formula-tense-imperfect" value="imperfectum">
+                  <label class="form-check-label" for="random-verb-formula-tense-imperfect">imperfectum</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" name="tense-futureI" id="random-verb-formula-tense-futureI" value="futurumPrimum">
+                  <label class="form-check-label" for="random-verb-formula-tense-futureI">futurum I</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" name="tense-perfect" id="random-verb-formula-tense-perfect" value="perfectum">
+                  <label class="form-check-label" for="random-verb-formula-tense-perfect">perfectum</label>
+                </div>
+              </div>
+              <div class="form-group">voice:
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" name="voice-active" id="random-verb-formula-voice-active" value="activus">
+                  <label class="form-check-label" for="random-verb-formula-voice-active">active</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" name="voice-passive" id="random-verb-formula-voice-passive" value="passivus">
+                  <label class="form-check-label" for="random-verb-formula-voice-passive">passive</label>
+                </div>
+              </div>
+              <div class="form-group">number:
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" name="number-singularis" id="random-verb-formula-number-singularis" value="singularis" checked>
+                  <label class="form-check-label" for="random-verb-formula-number-singularis">singularis</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" name="number-pluralis" id="random-verb-formula-number-pluralis" value="pluralis" checked>
+                  <label class="form-check-label" for="random-verb-formula-number-pluralis">pluralis</label>
+                </div>
+              </div>
+              <div class="form-group">person:
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" name="person-first" id="random-verb-formula-person-singularis" value="first" checked>
+                  <label class="form-check-label" for="random-verb-formula-person-first">first</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" name="person-second" id="random-verb-formula-person-second" value="second" checked>
+                  <label class="form-check-label" for="random-verb-formula-person-second">second</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" name="person-third" id="random-verb-formula-person-third" value="third" checked>
+                  <label class="form-check-label" for="random-verb-formula-person-third">third</label>
+                </div>
+              </div>
+              <button type="submit" class="btn">Generate</button>
+            </fieldset>
+          </form>
           <form class="row mt-3" id="random-verb-form" action="/">
             <fieldset>
               <legend>Random verb</legend>
@@ -132,6 +222,12 @@
           <div class="col-sm-12" id="placeholder">
             <!-- intentionally left blank -->
           </div>
+          <form hidden id="verb-formula-form" class="col-sm-12" action="/">
+            <div class="form-group">Answer:
+              <input class="form-control" type="text" name="verb-formula-answer" id="verb-formula-form-answer">
+              <button type="submit" class="btn btn-primary">Check</button>
+            </div>
+          </form>
           <form hidden id="pronoun-personal-form" class="col-sm-12" action="/">
             <div class="form-group">Number:
               <div class="form-check form-check-inline">
