@@ -97,7 +97,8 @@ document.getElementById("random-verb-form").onsubmit = function(e) {
 
   const firstConjugation = formData.get("first-conjugation");
   const secondConjugation = formData.get("second-conjugation");
-  const thirdConjugation = formData.get("third-conjugation");
+  const thirdConjugationA = formData.get("third-conjugation-a");
+  const thirdConjugationB = formData.get("third-conjugation-b");
   const fourthConjugation = formData.get("fourth-conjugation");
 
   const indicativeMood = formData.get("mood-indicative");
@@ -118,7 +119,7 @@ document.getElementById("random-verb-form").onsubmit = function(e) {
   const secondPerson = formData.get("person-second");
   const thirdPerson = formData.get("person-third");
 
-  const conjugationsIncluded = [firstConjugation, secondConjugation, thirdConjugation, fourthConjugation].filter(n => n);
+  const conjugationsIncluded = [firstConjugation, secondConjugation, thirdConjugationA, thirdConjugationB, fourthConjugation].filter(n => n);
   const moodsIncluded = [indicativeMood, imperativeMood].filter(n => n);
   const tensesIncluded = [presentTense, imperfectTense, futureITense, perfectTense].filter(n => n);
   const voicesIncluded = [activeVoice, passiveVoice].filter(n => n);
@@ -137,6 +138,8 @@ document.getElementById("random-verb-form").onsubmit = function(e) {
 
 function randomVerbAdvanced(conjugationsIncluded, moodsIncluded, tensesIncluded, voicesIncluded, numbersIncluded, personsIncluded) {
   currentWord = randomVerbWithDescriptionAdvanced(conjugationsIncluded, moodsIncluded, tensesIncluded, voicesIncluded, numbersIncluded, personsIncluded);
+  
+  console.log("current word " + currentWord);
 
   const placeholder = document.getElementById("placeholder");
   placeholder.innerHTML = "Word: " + currentWord.word;
@@ -240,4 +243,4 @@ function isCorrectVerb(conjugation, mood, tense, voice, number, person, correctW
 
 function isCorrectPronoun(number, person, grammaticalCase, correctWord) {
   return personalPronounTree[number][person][grammaticalCase] === correctWord;
-}
+};

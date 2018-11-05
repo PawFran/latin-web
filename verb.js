@@ -232,7 +232,7 @@ const secondConjugation = {
   }
 };
 
-const thirdConjugation = {
+const thirdConjugationA = {
   indicativus: {
     praesens: {
       activus: {
@@ -337,12 +337,129 @@ const thirdConjugation = {
           second: "legite"
         }
       },
-      activus: {
+      passivus: {
         singularis: {
           second: "legere"
         },
         pluralis: {
           second: "legimini"
+        }
+      }
+    }
+  }
+};
+
+const thirdConjugationB = {
+  indicativus: {
+    praesens: {
+      activus: {
+        singularis: {
+          first: "capio",
+          second: "capis",
+          third: "capit"
+        },
+        pluralis: {
+          first: "capimus",
+          second: "capitis",
+          third: "capiunt"
+        }
+      },
+      passivus: {
+        singularis: {
+          first: "capior",
+          second: "caperis",
+          third: "capitur"
+        },
+        pluralis: {
+          first: "capimur",
+          second: "capimini",
+          third: "capiuntur"
+        }
+      }
+    }, 
+    imperfectum: {
+      activus: {
+        singularis: {
+          first: "capiebam",
+          second: "capiebas",
+          third: "capiebat"
+        },
+        pluralis: {
+          first: "capiebamus",
+          second: "capiebatis",
+          third: "capiebant"
+        }
+      },
+      passivus: {
+        singularis: {
+          first: "capiebar",
+          second: "capiebaris",
+          third: "capiebatur"
+        },
+        pluralis: {
+          first: "capiebamur",
+          second: "capiebamini",
+          third: "capiebantur"
+        }
+      }
+    }, 
+    futurumPrimum: {
+      activus: {
+        singularis: {
+          first: "capiam",
+          second: "capies",
+          third: "capiet"
+        },
+        pluralis: {
+          first: "capiemus",
+          second: "capietis",
+          third: "capient"
+        }
+      },
+      passivus: {
+        singularis: {
+          first: "capiar",
+          second: "capieris",
+          third: "capietur"
+        },
+        pluralis: {
+          first: "capiemur",
+          second: "capiemini",
+          third: "capientur"
+        }
+      }
+    },
+    perfectum: {
+      activus: {
+        singularis: {
+          first: "cepi",
+          second: "cepisti",
+          third: "cepit"
+        },
+        pluralis: {
+          first: "cepimus",
+          second: "cepistis",
+          third: "ceperunt"
+        }
+      }
+    }
+  },
+  imperativus: {
+    praesens: {
+      activus: {
+        singularis: {
+          second: "cape"
+        },
+        pluralis: {
+          second: "capite"
+        }
+      },
+      passivus: {
+        singularis: {
+          second: "capere"
+        },
+        pluralis: {
+          second: "capimini"
         }
       }
     }
@@ -469,6 +586,7 @@ const fourthConjugation = {
 export const verbConjugationTree = {
   first: firstConjugation,
   second: secondConjugation,
-  third: thirdConjugation,
+  thirdA: thirdConjugationA,
+  thirdB: thirdConjugationB,
   fourth: fourthConjugation
 };
