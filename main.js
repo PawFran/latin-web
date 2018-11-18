@@ -89,6 +89,7 @@ function clearFormsAndFeedback() {
 
 let currentWord;
 let currentForm;
+let randomVerbFormulaFormData;
 
 // *** GENERATIVE FORMS ***
 document.getElementById("random-verb-form").onsubmit = function(e) {
@@ -151,12 +152,8 @@ function randomVerbAdvanced(conjugationsIncluded, moodsIncluded, tensesIncluded,
   document.getElementById("verb-formula-form").hidden = true;
 };
 
-document.getElementById("random-verb-formula-form").onsubmit = function(e) {
-  e.preventDefault();
-
+function generateRandomVerbFormulaForm(formData) {
   document.getElementById("feedback-message").innerHTML ="";
-
-  const formData = new FormData(e.target);
 
   const firstConjugation = formData.get("first-conjugation");
   const secondConjugation = formData.get("second-conjugation");
@@ -199,6 +196,15 @@ document.getElementById("random-verb-formula-form").onsubmit = function(e) {
   randomVerbFormulaAdvanced(conjugationsIncluded, moodsIncluded, tensesIncluded, voicesIncluded, numbersIncluded, personsIncluded);
 };
 
+document.getElementById("random-verb-formula-form").onsubmit = function(e) {
+  e.preventDefault();
+
+  const formData = new FormData(e.target);
+  randomVerbFormulaFormData = formData;
+
+  generateRandomVerbFormulaForm(formData);
+};
+
 function randomVerbFormulaAdvanced(conjugationsIncluded, moodsIncluded, tensesIncluded, voicesIncluded, numbersIncluded, personsIncluded) {
   // currentWord = randomVerbWithDescriptionAdvanced(conjugationsIncluded, moodsIncluded, tensesIncluded, voicesIncluded, numbersIncluded, personsIncluded);
   currentForm = randomVerbFormula(conjugationsIncluded, moodsIncluded, tensesIncluded, voicesIncluded, numbersIncluded, personsIncluded);
@@ -229,11 +235,12 @@ document.getElementById("verb-formula-form").onsubmit = function(e) {
 
   const isCorrect = isCorrectVerbForm(answer, currentForm.word);
   if (isCorrect) {
-    feedback.innerHTML ="correct";
+    generateRandomVerbFormulaForm(randomVerbFormulaFormData);
+    feedback.innerHTML ="correct. try new";
   } else {
     feedback.innerHTML = "incorrect. given answer: " + answer + "<br>" + 
       "correct answer would be: " + currentForm.word;
-  }
+  };
 };
 
 document.getElementById("noun-form").onsubmit = function(e) {
