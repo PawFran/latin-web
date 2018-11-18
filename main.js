@@ -236,6 +236,7 @@ document.getElementById("verb-formula-form").onsubmit = function(e) {
   if (isCorrect) {
     generateRandomVerbFormulaForm(randomVerbFormulaFormData);
     feedback.innerHTML ="correct. try new";
+    document.getElementById("verb-formula-form-answer").value="";
   } else {
     feedback.innerHTML = "incorrect. given answer: " + answer + "<br>" + 
       "correct answer would be: " + currentForm.word;
