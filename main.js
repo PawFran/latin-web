@@ -212,9 +212,8 @@ function randomVerbFormulaAdvanced(conjugationsIncluded, moodsIncluded, tensesIn
   const infinitive = infinitives[currentForm.conjugation];
 
   const placeholder = document.getElementById("placeholder");
-  placeholder.innerHTML = "infinitive: " + infinitive + "<br> mood: " + currentForm.mood 
-  + "<br> tense: " + currentForm.tense + "<br> voice: " + currentForm.voice + "<br> number: " + currentForm.number 
-  + "<br> person: " + currentForm.person;
+  placeholder.innerHTML = "infinitive: " + infinitive + "<br>" + currentForm.mood + " " + currentForm.tense + " " + currentForm.voice 
+  + "<br> " + currentForm.person + " person " + currentForm.number;
 
   document.getElementById("verb-form").hidden = true;
   document.getElementById("noun-form").hidden = true;
